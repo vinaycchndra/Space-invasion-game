@@ -12,7 +12,7 @@ def run_game():
     ship = Ship(screen)
     
     while True:
-        gf.check_events()                     # Function to check for events        
+        gf.check_events(ship)                 # Function to check for events        
         gf.update_screen(ai_sett,screen,ship) # Function to update the screen
         
 run_game()
