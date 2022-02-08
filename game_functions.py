@@ -7,6 +7,7 @@ def check_events(ai_setting, screen, ship, bullets):
         if event.type==pygame.QUIT:
             pygame.quit()
             sys.exit()
+
         elif event.type==pygame.KEYDOWN:
             check_key_down_events(event,ship,screen,ai_setting,bullets)
             
@@ -24,6 +25,10 @@ def check_key_down_events(event,ship,screen,ai_setting,bullets):   #Function to 
 
     elif event.key==pygame.K_SPACE:
         fire_bullet(bullets,ai_setting,screen,ship)
+
+    elif event.key == pygame.K_q:                                   #Game exiting with q pressing 
+            pygame.quit()
+            sys.exit()
 
 def check_key_up_events(event,ship):                                #Function to check events of down key_press
     if event.key==pygame.K_RIGHT:
@@ -44,11 +49,12 @@ def fire_bullet(bullets,ai_setting,screen,ship):                    #Function to
             new_bullet = Bullet(ai_setting,screen,ship)
             bullets.add(new_bullet)    
 
-def update_screen(ai_sett,screen,ship,bullets):
+def update_screen(ai_sett,screen,ship,bullets,alien):
     screen.fill(ai_sett.bg_color)
+    ship.blitme()                                                   #Method which plots ship image on the screen
+    alien.blitme()                                                  #Method which plots alien image on the screen
     for bullet in bullets.sprites():   
         bullet.draw_bullet()
-    ship.blitme()                                                   #Method which plots ship image on the screen
     pygame.display.flip()
         
     
