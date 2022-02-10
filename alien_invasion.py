@@ -13,11 +13,12 @@ def run_game():
     pygame.display.set_caption('Alien invasion')
     ship       = Ship(screen,ai_sett)
     bullets    = Group()
-    alien      = Alien(ai_sett,screen)
+    aliens     = Group()
+    gf.create_fleet(ai_sett,screen,aliens)
     while True:
         gf.check_events(ai_sett,screen,ship,bullets)        # Function to check for events        
         ship.update()                                       # Method which updates the ship movement from keys input    
         gf.update_bullets(bullets)                          # Update bullet positions      
-        gf.update_screen(ai_sett,screen,ship,bullets,alien) # Function to update the screen
+        gf.update_screen(ai_sett,screen,ship,bullets,aliens)# Function to update the screen
         
 run_game()

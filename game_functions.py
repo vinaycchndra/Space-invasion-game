@@ -1,6 +1,7 @@
 import sys
 import pygame
 from bullet import Bullet
+from alien import Alien
 
 def check_events(ai_setting, screen, ship, bullets):
     for event in pygame.event.get():
@@ -49,12 +50,41 @@ def fire_bullet(bullets,ai_setting,screen,ship):                    #Function to
             new_bullet = Bullet(ai_setting,screen,ship)
             bullets.add(new_bullet)    
 
-def update_screen(ai_sett,screen,ship,bullets,alien):
+def update_screen(ai_sett,screen,ship,bullets,aliens):
     screen.fill(ai_sett.bg_color)
     ship.blitme()                                                   #Method which plots ship image on the screen
-    alien.blitme()                                                  #Method which plots alien image on the screen
+    aliens.draw(screen)                                             #Method which plots alien image on the screen
     for bullet in bullets.sprites():   
         bullet.draw_bullet()
     pygame.display.flip()
+
+def create_fleet(ai_setting,screen,aliens):                         #Alien fleet create function
+    alien = Alien(ai_setting,screen)
+    alien_width = alien.rect.width
+    total_space = ai_setting.screen_width-2*alien_width             #Number of aliens that can sit in the screen
+    Number_of_aliens = total_space//(2*alien_width)
+    for _ in range(Number_of_aliens):                               #adding aliens to the group object
+        alien = Alien(ai_setting, screen)
+        alien.x = alien_width*(1+2*_)
+        alien.rect.x = alien.x
+        aliens.add(alien)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    
         
     
