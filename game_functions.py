@@ -60,17 +60,21 @@ def update_screen(ai_sett,screen,ship,bullets,aliens):
 
 def create_fleet(ai_setting,screen,aliens):                         #Alien fleet create function
     alien = Alien(ai_setting,screen)
-    alien_width = alien.rect.width
+    Number_aliens_x = get_number_aliens_x(ai_setting,alien.rect.width)
+    print(Number_aliens_x)
+    for alien_number in range(Number_aliens_x):                     #adding aliens to the group object
+        create_alien(ai_setting,screen,aliens,alien_number)   
+
+def get_number_aliens_x(ai_setting,alien_width):
     total_space = ai_setting.screen_width-2*alien_width             #Number of aliens that can sit in the screen
     Number_of_aliens = total_space//(2*alien_width)
-    for _ in range(Number_of_aliens):                               #adding aliens to the group object
-        alien = Alien(ai_setting, screen)
-        alien.x = alien_width*(1+2*_)
-        alien.rect.x = alien.x
-        aliens.add(alien)
+    return Number_of_aliens
 
-
-
+def create_alien(ai_setting,screen,aliens,alien_number): 
+    alien = Alien(ai_setting, screen)
+    alien.x = alien.rect.width*(1+2*alien_number)
+    alien.rect.x = alien.x
+    aliens.add(alien)
 
 
 
